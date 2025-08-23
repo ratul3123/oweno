@@ -9,10 +9,14 @@ import { BarLoader } from "react-spinners";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
+import CreateGroupModal from "./_components/create-group-modal";
+import { useRouter } from "next/navigation";
 
 const ContactsPage = () => {
     const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
     const { data, isLoading } = useConvexQuery(api.contacts.getAllContacts);
+
+    const router = useRouter();
 
     if (isLoading) {
         return (
@@ -114,6 +118,14 @@ const ContactsPage = () => {
                     )}
                 </div>
             </div>
+
+            <CreateGroupModal 
+                isOpen={isCreateGroupModalOpen} 
+                onClose={() => setIsCreateGroupModalOpen(false)}
+                onSuccess={(groupId) => {
+                    router.push(`/groups/${groupId}`);
+                }}
+            />
         </div>
     );
 };
