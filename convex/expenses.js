@@ -104,10 +104,8 @@ export const deleteExpense = mutation({
     expenseId: v.id("expenses"),
   },
   handler: async (ctx, args) => {
-    // Get the current user
     const user = await ctx.runQuery(internal.users.getCurrentUser);
 
-    // Get the expense
     const expense = await ctx.db.get(args.expenseId);
     if (!expense) {
       throw new Error("Expense not found");
@@ -117,34 +115,6 @@ export const deleteExpense = mutation({
     // Only the creator of the expense or the payer can delete it
     if (expense.createdBy !== user._id && expense.paidByUserId !== user._id) {
       throw new Error("You don't have permission to delete this expense");
-    }
-
-    // Delete any settlements that specifically reference this expense
-    // Since we can't use array.includes directly in the filter, we'll
-    // fetch all settlements and then filter in memory
-    const allSettlements = await ctx.db.query("settlements").collect();
-
-    const relatedSettlements = allSettlements.filter(
-      (settlement) =>
-        settlement.relatedExpenseIds !== undefined &&
-        settlement.relatedExpenseIds.includes(args.expenseId)
-    );
-
-    for (const settlement of relatedSettlements) {
-      // Remove this expense ID from the relatedExpenseIds array
-      const updatedRelatedExpenseIds = settlement.relatedExpenseIds.filter(
-        (id) => id !== args.expenseId
-      );
-
-      if (updatedRelatedExpenseIds.length === 0) {
-        // If this was the only related expense, delete the settlement
-        await ctx.db.delete(settlement._id);
-      } else {
-        // Otherwise update the settlement to remove this expense ID
-        await ctx.db.patch(settlement._id, {
-          relatedExpenseIds: updatedRelatedExpenseIds,
-        });
-      }
     }
 
     // Delete the expense
