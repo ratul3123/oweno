@@ -102,3 +102,29 @@ export const createGroup = mutation({
     });
   },
 });
+
+export const deleteGroup = mutation({
+  args: {
+    groupId: v.id("groups"),
+  },
+  handler: async (ctx, args) => {
+    const currentUser = await ctx.runQuery(internal.users.getCurrentUser);
+
+    const group = await ctx.db.get(args.groupId);
+    if (!group) throw new Error("Group not found");
+
+    // Check if the current user is a member of the group
+    const isMember = group.members.some((m) => m.userId === currentUser._id);
+    if (!isMember) throw new Error("You must be a member of the group to delete it");
+
+    // Only allow admins to delete the group
+    const isAdmin = group.members.some(
+      (m) => m.userId === currentUser._id && m.role === "admin"
+    );
+    if (!isAdmin) throw new Error("You are not authorized to delete this group");
+
+    await ctx.db.delete(args.groupId);
+
+    return { success: true };
+  },
+});
