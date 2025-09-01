@@ -58,6 +58,7 @@ const DashboardPage = ({ children }) => {
             </Button>
           </div>
 
+          {/* Balance overview cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Card>
               <CardHeader className="pb-2">
@@ -133,6 +134,7 @@ const DashboardPage = ({ children }) => {
             </Card>
           </div>
 
+          {/* Main dashboard content */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Left column */}
             <div className="lg:col-span-2 space-y-6">

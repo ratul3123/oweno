@@ -12,6 +12,7 @@ import {
 } from "recharts";
 
 const ExpenseSummary = ({ monthlySpending, totalSpent }) => {
+  // Format monthly data for chart
   const monthNames = [
     "Jan",
     "Feb",
@@ -36,6 +37,7 @@ const ExpenseSummary = ({ monthlySpending, totalSpent }) => {
       };
     }) || [];
 
+  // Get current year
   const currentYear = new Date().getFullYear();
   const currentMonth = new Date().getMonth();
 

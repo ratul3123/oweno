@@ -19,15 +19,19 @@ const ContactsPage = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
   
+    // Check for the createGroup parameter when the component mounts
     useEffect(() => {
       const createGroupParam = searchParams.get("createGroup");
   
       if (createGroupParam === "true") {
+        // Open the modal
         setIsCreateGroupModalOpen(true);
   
+        // Remove the parameter from the URL
         const url = new URL(window.location.href);
         url.searchParams.delete("createGroup");
   
+        // Replace the current URL without the parameter
         router.replace(url.pathname + url.search);
       }
     }, [searchParams, router]);
@@ -53,6 +57,7 @@ const ContactsPage = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Individual Contacts */}
                 <div>
                     <h2 className="text-xl font-bold mb-4 flex items-center">
                         <User className="mr-2 h-5 w-5" />
@@ -94,6 +99,8 @@ const ContactsPage = () => {
                       </div>
                     )}
                 </div>
+                
+                {/* Groups */}
                 <div>
                     <h2 className="text-xl font-bold mb-4 flex items-center">
                         <User className="mr-2 h-5 w-5" />

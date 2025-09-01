@@ -20,6 +20,7 @@ import { ArrowUpCircle, ArrowDownCircle } from "lucide-react";
 const GroupBalances = ({ balances }) => {
   const { data: currentUser } = useConvexQuery(api.users.getCurrentUser);
 
+  /* ───── guards ────────────────────────────────────────────────────────── */
   if (!balances?.length || !currentUser) {
     return (
       <div className="text-center py-4 text-muted-foreground">
@@ -28,6 +29,7 @@ const GroupBalances = ({ balances }) => {
     );
   }
 
+  /* ───── helpers ───────────────────────────────────────────────────────── */
   const me = balances.find((b) => b.id === currentUser._id);
   if (!me) {
     return (
@@ -54,8 +56,10 @@ const GroupBalances = ({ balances }) => {
     owedByMembers.length === 0 &&
     owingToMembers.length === 0;
 
-  return (
+    /* ───── UI ────────────────────────────────────────────────────────────── */
+    return (
     <div className="space-y-4">
+      {/* Current user's total balance */}
       <div className="text-center pb-4 border-b">
         <p className="text-sm text-muted-foreground mb-1">Your balance</p>
         <p
@@ -88,6 +92,7 @@ const GroupBalances = ({ balances }) => {
         </div>
       ) : (
         <div className="space-y-4">
+          {/* People who owe the current user */}
           {owedByMembers.length > 0 && (
             <div>
               <h3 className="text-sm font-medium flex items-center mb-3">
@@ -118,6 +123,7 @@ const GroupBalances = ({ balances }) => {
             </div>
           )}
 
+          {/* People the current user owes */}
           {owingToMembers.length > 0 && (
             <div>
               <h3 className="text-sm font-medium flex items-center mb-3">

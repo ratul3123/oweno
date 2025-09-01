@@ -83,6 +83,7 @@ const GroupExpensesPage = () => {
         </div>
       </div>
 
+      {/* Grid layout for group details */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
         <div className="lg:col-span-2">
           <Card>
@@ -107,6 +108,7 @@ const GroupExpensesPage = () => {
         </div>
       </div>
 
+      {/* Tabs for expenses and settlements */}
       <Tabs
         defaultValue="expenses"
         value={activeTab}

@@ -2,6 +2,7 @@ import { query } from "./_generated/server";
 import { v } from "convex/values";
 import { internal } from "./_generated/api";
 
+// Get expenses for a specific group
 export const getGroupExpenses = query({
   args: { groupId: v.id("groups") },
   handler: async (ctx, { groupId }) => {

@@ -17,9 +17,9 @@ export default defineSchema({
         description: v.string(),
         amount: v.number(),
         category: v.optional(v.string()),
-        date: v.number(), 
+        date: v.number(), // timestamp
         paidByUserId: v.id("users"), // Reference to users table
-        splitType: v.string(),
+        splitType: v.string(), // "equal", "percentage", "exact"
         splits: v.array(
             v.object({
                 userId: v.id("users"), // Reference to users table

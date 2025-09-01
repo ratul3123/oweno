@@ -32,7 +32,10 @@ const ExpenseList = ({
     );
   }
 
+  // Helper to get user details from cache or look up from expense
   const getUserDetails = (userId) => {
+    // For the group context, we need to look up members from somewhere else
+    // This is a simplified fallback
     return {
       name:
         userId === currentUser?._id
@@ -43,6 +46,7 @@ const ExpenseList = ({
     };
   };
 
+  // Check if the user can delete an expense (creator or payer)
   const canDeleteExpense = (expense) => {
     if (!currentUser) return false;
     return (
@@ -52,7 +56,9 @@ const ExpenseList = ({
   };
 
 
+  // Handle delete expense
   const handleDeleteExpense = async (expense) => {
+    // Use basic JavaScript confirm
     const confirmed = window.confirm(
       "Are you sure you want to delete this expense? This action cannot be undone."
     );
@@ -84,6 +90,7 @@ const ExpenseList = ({
             <CardContent className="py-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
+                  {/* Category icon */}
                   <div className="bg-primary/10 p-2 rounded-full">
                     <CategoryIcon className="h-5 w-5 text-primary" />
                   </div>
@@ -144,6 +151,7 @@ const ExpenseList = ({
                 </div>
               </div>
 
+              {/* Display splits info */}
               <div className="mt-3 text-sm">
                 <div className="flex gap-2 flex-wrap">
                   {expense.splits.map((split, idx) => {

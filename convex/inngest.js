@@ -1,6 +1,8 @@
 import { query } from './_generated/server';
 import { v } from 'convex/values';
 
+// 1‑to‑1 debts netted against cases where the user
+// was the payer and against settlements already made.
 export const getUsersWithOutstandingDebts = query({
   handler: async (ctx) => {
     const users = await ctx.db.query('users').collect();

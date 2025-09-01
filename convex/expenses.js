@@ -2,6 +2,7 @@ import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 import { internal } from "./_generated/api";
 
+// Get expenses between current user and a specific person
 export const getExpensesBetweenUsers = query({
   args: { userId: v.id("users") },
   handler: async (ctx, { userId }) => {
@@ -9,6 +10,7 @@ export const getExpensesBetweenUsers = query({
     if (me._id === userId) throw new Error("Cannot query yourself");
 
     /* ───── 1. One-on-one expenses where either user is the payer ───── */
+    // Use the compound index (`paidByUserId`,`groupId`) with groupId = undefined
     const myPaid = await ctx.db
       .query("expenses")
       .withIndex("by_user_and_group", (q) =>
@@ -23,6 +25,7 @@ export const getExpensesBetweenUsers = query({
       )
       .collect();
 
+    // Merge → candidate set is now just the rows either of us paid for
     const candidateExpenses = [...myPaid, ...theirPaid];
 
     /* ───── 2. Keep only rows where BOTH are involved ───── */
@@ -168,8 +171,10 @@ export const deleteExpense = mutation({
     expenseId: v.id("expenses"),
   },
   handler: async (ctx, args) => {
+    // Get the current user
     const user = await ctx.runQuery(internal.users.getCurrentUser);
 
+    // Get the expense
     const expense = await ctx.db.get(args.expenseId);
     if (!expense) {
       throw new Error("Expense not found");

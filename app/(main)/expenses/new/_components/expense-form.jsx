@@ -154,6 +154,7 @@ const ExpenseForm = ({ type = "individual", onSuccess }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="space-y-4">
+         {/* Description and amount */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
             <Label htmlFor="description">Description</Label>
@@ -185,6 +186,7 @@ const ExpenseForm = ({ type = "individual", onSuccess }) => {
           </div>
         </div>
 
+        {/* Category and date */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
             <Label htmlFor="category">Category</Label>
@@ -233,6 +235,7 @@ const ExpenseForm = ({ type = "individual", onSuccess }) => {
           </div>
         </div>
 
+        {/* Group selector (for group expenses) */}
         {type === "group" && (
           <div className="space-y-2">
             <Label>Group</Label>
@@ -259,6 +262,7 @@ const ExpenseForm = ({ type = "individual", onSuccess }) => {
           </div>
         )}
 
+        {/* Participants (for individual expenses) */}
         {type === "individual" && (
           <div className="space-y-2">
             <Label>Participants</Label>
@@ -274,6 +278,7 @@ const ExpenseForm = ({ type = "individual", onSuccess }) => {
           </div>
         )}
 
+        {/* Paid by selector */}
         <div className="space-y-2">
           <Label>Paid by</Label>
           <select
@@ -294,6 +299,7 @@ const ExpenseForm = ({ type = "individual", onSuccess }) => {
           )}
         </div>
 
+        {/* Split type */}
         <div className="space-y-2">
           <Label>Split type</Label>
           <Tabs

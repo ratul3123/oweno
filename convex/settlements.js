@@ -2,6 +2,9 @@ import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 import { internal } from "./_generated/api";
 
+/* ============================================================================
+ *  MUTATION: createSettlement
+ * -------------------------------------------------------------------------- */
 export const createSettlement = mutation({
   args: {
     amount: v.number(), // must be > 0
@@ -52,6 +55,12 @@ export const createSettlement = mutation({
   },
 });
 
+/* ============================================================================
+ *  QUERY: getSettlementData
+ *  Returns the balances relevant for a page routed as:
+ *      /settlements/[entityType]/[entityId]
+ *  where entityType ∈ {"user","group"}
+ * -------------------------------------------------------------------------- */
 export const getSettlementData = query({
   args: {
     entityType: v.string(), // "user"  | "group"
