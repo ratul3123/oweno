@@ -183,8 +183,18 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="border-t bg-gray-50 py-12 text-center text-sm text-muted-foreground">
-        © {new Date().getFullYear()} OweNo. All rights reserved.
+      <footer className="border-t bg-gray-50 py-12">
+        <div className="container mx-auto px-4 text-center text-sm text-muted-foreground">
+          © {new Date().getFullYear()} OweNo · All Rights Reserved · Built by{" "}
+          <Link
+            href="https://github.com/ratul3123"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-green-600 transition-colors hover:text-green-800 hover:underline"
+          >
+            Shahriar Ratul
+          </Link>
+        </div>
       </footer>
     </div>
   );
