@@ -8,15 +8,15 @@ import { Toaster } from "sonner";
 const inter = Inter({subsets: ["latin"]});
 
 export const metadata = {
-  title: "OweNo",
-  description: "Expense Sharing & Bill-Splitting Application",
+  title: "OweNo - Expense Management & Bill-Splitting Application",
+  description: "Expense Management & Bill-Splitting Application",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/logos/logo-s.png" sizes="any" />
+        <link rel="icon" href="favicon.ico" sizes="any" />
       </head>
       <body
         className={`${inter.className}`}
