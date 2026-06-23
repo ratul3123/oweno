@@ -46,8 +46,9 @@ OweNo is a modern full-stack expense splitting platform for individuals and grou
 ### Dashboard
 ![Dashboard](docs/ui-dashboard.png)
 
-### Group Expense
-![Group View](docs/ui-group.png)
+### Add & View Expense
+![Group View](docs/ui-group-1.png)
+![Group View](docs/ui-group-2.png)
 
 
 ## Why OweNo?
