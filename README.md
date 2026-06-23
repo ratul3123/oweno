@@ -23,7 +23,7 @@ OweNo is a modern full-stack expense splitting platform for individuals and grou
 
 ## Live Demo
 
-> workingonit.com
+https://oweno-ai.vercel.app/
 
 
 ## Features
