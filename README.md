@@ -50,6 +50,10 @@ https://oweno-ai.vercel.app/
 ![Group View](docs/ui-group-1.png)
 ![Group View](docs/ui-group-2.png)
 
+### Email Notifications 
+![Group View](docs/payment-reminder-1.png)
+![Group View](docs/payment-reminder-2.png)
+
 
 ## Why OweNo?
 
